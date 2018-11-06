@@ -90,43 +90,84 @@ print(b)
 """
 
 ###Exercise 8: Rock Paper Scissors
-def game():
+"""
+def get_user_input():
+    player = ''
+    while player not in ('ROCK','PAPER','SCISSORS'):
+        player = input('Enter Rock or Paper or Scissors: ').upper()
+
+        if player not in ('ROCK','PAPER','SCISSORS'):
+            print('Invalid Entry! Please Pick: "Rock" or "Paper" or "Scissors"')
+
+def decide_game(player_one, player_two):
+    if player_one == player_two:
+        print('It\'s a tie!')
+
+    elif (player_one == 'ROCK' and player_two == 'PAPER') or (player_one == 'PAPER' and player_two == 'SCISSORS') or (player_one == 'SCISSORS' and player_two == 'ROCK'):
+        print ('Player Two Wins!')
+
+    elif (player_two == 'ROCK' and player_one == 'PAPER') or (player_two == 'PAPER' and player_one == 'SCISSORS')  or (player_two == 'SCISSORS' and player_one == 'ROCK'):
+        print ('Player One Wins!')
+
+def RockPaperScissors():
     game_start = input('Do you want to play Rock Paper Scissors? (Y/N): ').upper()
+
     while game_start == 'Y':
-        player_one = input('Player One, Enter Rock or Paper or Scissors: ').upper()
-        if player_one not in ('ROCK','PAPER','SCISSORS'):
-            print('Player One, invalid entry! Please pick: "Rock" or "Paper" or "Scissors"')
-            continue
-        player_two = input('Player Two, Enter Rock or Paper or Scissors: ').upper()
-        if player_two not in ('ROCK','PAPER','SCISSORS'):
-            print('Player Two, invalid entry! Please pick: "Rock" or "Paper" or "Scissors"')
-            continue
-        elif player_one == player_two:
-            print('It\'s a tie!')
-            if input('Do you want to play again? (Y/N): ').upper() == 'Y':
-                continue
-            else:
-                print('Game Over')
-                break
-        elif (player_one == 'ROCK' and player_two == 'PAPER') or (player_one == 'PAPER' and player_two == 'SCISSORS') or (player_one == 'SCISSORS' and player_two == 'ROCK'):
-            print ('Player Two Wins!')
-            if input('Do you want to play again?(Y/N): ').upper() == 'Y':
-                continue
-            else:
-                print('Game Over')
-                break
-        elif (player_two == 'ROCK' and player_one == 'PAPER') or (player_two == 'PAPER' and player_one == 'SCISSORS')  or (player_two == 'SCISSORS' and player_one == 'ROCK'):
-            print ('Player One Wins!')
-            if input('Do you want to play again? (Y/N): ').upper() == 'Y':
-                continue
-            else:
-                print('Game Over')
-                break
+
+        player_one = get_user_input()
+        player_two = get_user_input()
+
+        decide_game(player_one, player_two)
+
+        game_start = input('Do you want to play again? (Y/N): ').upper()
+
+    print('Game Over')
+
+RockPaperScissors()
+"""
+
+###Exercise 9:Guessing Game One
+"""
+def decide_game(guess,answer):
+
+    if guess < answer:
+        print('Too Low! Guess again or type "exit" to exit game!')
+
+    elif guess > answer:
+        print('Too High! Guess again or type "exit" to exit game!')
+
+def guess_mechanism():
+    guess = input('Guess a number between 1-9: ')
+    if guess == 'exit':
+        guess = 10
+    guess = int(guess)
+    return guess
+
+import random
+
+def guessing_game():
+
+    guess = guess_mechanism()
+    answer = random.randint(1,10)
+    count = 0
+
+    while guess != answer:
+
+        if guess > 9:
+            print ('Game Over')
+            break
+
+        decide_game(guess,answer)
+
+        guess = guess_mechanism()
+
+        count += 1
+
     else:
-        print('Game Over')
+        print('You guessed it! It took you %s guesse(s)' % count)
 
-game()
-
+guessing_game()
+"""
 
 
 
