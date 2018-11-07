@@ -169,6 +169,127 @@ def guessing_game():
 guessing_game()
 """
 
+###Exercise 10: List Overlap Comprehensions
+"""
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+c = [x for x in a if x in b]
+d = []
+for x in c:
+    if x not in d:
+        d.append(x)
+
+print(d)
+"""
+
+###Exercise 11: Check Primality Functions
+"""
+def guess_input():
+    return input('Please guess an interger or enter \'Exit\' to stop game: ')
+
+def input_validation(guess):
+    if guess.upper() == 'EXIT':
+        return False
+
+    else:
+        return True
+
+def prime_check(number):
+    divisor_list =[x for x in range(2,number) if number % x == 0]
+
+    if divisor_list == []:
+        print('Number is prime.')
+
+    else:
+        print('Number is not prime.')
+
+def prime_guess_game():
+    guess = guess_input()
+
+    while input_validation(guess):
+        prime_check(int(guess))
+        guess = guess_input()
+
+    else:
+        print('Game Over')
+
+prime_guess_game()
+"""
+
+###Exercise 12: List Ends
+"""
+a = [5, 10, 15, 20, 25]
+
+def list_ends(series):
+    new_list = []
+    new_list.append(series[0])
+    new_list.append(series[len(series)-1])
+    return new_list
+
+print(list_ends(a))
+"""
+
+###Exercise 13:Fibonacci
+"""
+def Fibonacci():
+    number = int(input('How many Fibonacci numbers do you want? '))
+    series = []
+    if number == 1:
+        series.append(1)
+    if number == 2:
+        series = [1,1]
+    if number >= 3:
+        series = [1,1]
+        for x in range(number-2):
+            series.append(series[x]+series[x+1])
+    return series
+
+print(Fibonacci())
+"""
+
+###Exercise 14: List Remove Duplicates
+"""
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+def list_overlap(a,b):
+    c = [x for x in a if x in b]
+    c = set(c)
+    c = sorted(list(c))
+    return(c)
+
+print(list_overlap(a,b))
+"""
+
+###Exercise 15: Reverse Word Order
+"""
+s = 'this is a test'
+def reverse(s):
+    s = s.split()
+    s = s[::-1]
+    s = " ".join(s)
+    return s
+
+print(reverse(s))
+"""
+
+###Exercise 16: Password Generator
+"""
+def password_generator(length):
+    import random
+    import string
+    letters = string.ascii_letters
+    letters = list(letters)
+    numbers = [x for x in range(0,10)]
+    symbols = string.punctuation
+    symbols = list(symbols)
+    source = letters+numbers+symbols
+    password = []
+    for x in range(1,length):
+        password.append(str(random.choice(source)))
+    password = ''.join(password)
+    return password
 
 
 
