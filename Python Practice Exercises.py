@@ -290,8 +290,39 @@ def password_generator(length):
         password.append(str(random.choice(source)))
     password = ''.join(password)
     return password
+"""
+
+###Exercise 18: Cows And Bulls
+def guessing_mechanism(guess,number):
+    cow = 0
+    for x in range(4):
+        if guess[x] in number:
+            cow += 1
+    bull = 4 - cow
+    print('%s cow(s), %s bull(s)' % (cow,bull))
 
 
+def cows_and_bulls():
+    import random
+    number = []
+    for x in range(4):
+        number.append(str(random.randint(0,9)))
+    number = ''.join(number)
+    print('Welcome to the Cows and Bulls Game!')
+    print(number)
+    guess = str(input('Please Guess a 4 Digit Number '))
+    if guess != number:
+        guessing_mechanism(guess,number)
+    else:
+        while guess != number:
+            guess = str(input('Please Guess a 4 Digit Number '))
+            guessing_mechanism(guess,number)
+        else:
+            print('You Won!')
+
+
+
+cows_and_bulls()
 
 
 
