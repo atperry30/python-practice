@@ -293,6 +293,7 @@ def password_generator(length):
 """
 
 ###Exercise 18: Cows And Bulls
+"""
 def guessing_mechanism(guess,number,guess_count):
     cow = 0
     bull = 0
@@ -336,15 +337,182 @@ def cows_and_bulls():
             guess_count +=1
 
 cows_and_bulls()
-
-"""
-answer	6655
-6666	2 cow, 0 bull
-5555	2 cow, 0 bull
-6655	0 cow, 4 bull
-6565	2 cow, 2 bull
 """
 
+
+###Exercise 20: Element Search
+"""
+a = [x for x in range(0,3000) if x % 3 != 0]
+
+def middle_index_calc(series):
+    if len(series) % 2 == 0:
+        return int(len(series)/2)
+
+    else:
+        return int((len(series)-1)/2)
+
+def binary_search(series):
+    number = int(input('Enter number to find in list: '))
+
+    while len(series) >= 1:
+
+        start_index = 0
+        end_index = len(series)-1
+        middle_index = middle_index_calc(series)
+
+        start_value = series[start_index]
+        end_value = series[end_index]
+        middle_value= series[middle_index]
+
+        if number == middle_value:
+            #print(series)
+            #print(start_value)
+            #print(middle_value)
+            #print(end_value)
+            print('In List')
+            break
+
+        elif number < start_value or number > end_value:
+            #print(series)
+            #print(start_value)
+            #print(middle_value)
+            #print(end_value)
+            print('Not In List')
+            break
+
+        elif number >= start_value and number < middle_value:
+            #print(series)
+            #print(start_value)
+            #print(middle_value)
+            #print(end_value)
+            series = series[:middle_index]
+
+        elif number <= end_value and number > middle_value:
+            series = series[middle_index:]
+            #print(series)
+            #print(start_value)
+            #print(middle_value)
+            #print(end_value)
+
+binary_search(a)
+"""
+
+###Exercise 21/22: Write To A File/Read from File
+"""
+def password_generator(length):
+    import random
+    import string
+    letters = string.ascii_letters
+    letters = list(letters)
+    numbers = [x for x in range(0,10)]
+    symbols = string.punctuation
+    symbols = list(symbols)
+    source = letters+numbers+symbols
+    password = []
+    for x in range(1,length):
+        password.append(str(random.choice(source)))
+    password = ''.join(password)
+    return password
+
+#file_name = str(input('What would you like to name you password file? '))
+file_name = 'Test_Password_List'
+
+password_list = []
+for x in range(0,20):
+    password_counter = 'Password #'+str(x)+':'
+    password_list.append(password_counter)
+    password_list.append(password_generator(25))
+password_string = '\n'.join(password_list)
+
+with open(file_name+'.txt', 'w') as open_file:
+    open_file.write(password_string)
+
+with open('Test_Password_List.txt', 'r') as open_file:
+    password = open_file.read()
+    print(password)
+"""
+
+###Exercise 23: File Overlap:
+"""
+prime_number = open('primenumbers.txt','r')
+prime_number_string = prime_number.read()
+happy_number = open('happynumbers.txt','r')
+happy_number_string = happy_number.read()
+
+prime_number_list = prime_number_string.split()
+happy_number_list = happy_number_string.split()
+
+overlap_list = [x for x in prime_number_list if x in happy_number_list]
+
+print(overlap_list)
+"""
+
+#Exercise 24: Draw a Game Board
+"""
+def horizontal(size):
+    print(' ---'*size)
+
+def vertical(size):
+    print('|   '*(size+1))
+
+def game_board():
+    #size = int(input('What size grid are you intrested in? '))
+    size = 3
+
+    for x in range(size):
+        horizontal(size)
+        vertical(size)
+
+    horizontal(size)
+
+game_board()
+"""
+
+
+
+
+#Exercise 25: Guessing Game Two
+"""
+def middle_index_calc(series):
+    if len(series) == 1:
+        return 0
+    if len(series) % 2 == 0:
+        return int(len(series)/2)
+    else:
+        return int((len(series)-1)/2)
+
+
+def computer_guess_mechanism(guess_range):
+    computer_guess = guess_range[middle_index_calc(guess_range)]
+    return computer_guess
+
+def guessing_game():
+    answer_pool = [x for x in range(0,1001)]
+    correct_answer = int(input('What number do you want to computer to guess between 0 and 1,000? '))
+    computer_guess = computer_guess_mechanism(answer_pool)
+    guess_count = 1
+
+    if correct_answer < 0 or correct_answer >= 1001:
+        print('Answer outside of range')
+
+    while computer_guess != correct_answer:
+
+        if correct_answer > computer_guess:
+            answer_pool = answer_pool[middle_index_calc(answer_pool):]
+            computer_guess = computer_guess_mechanism(answer_pool)
+            guess_count += 1
+
+        elif correct_answer < computer_guess:
+            answer_pool = answer_pool[:middle_index_calc(answer_pool)]
+            computer_guess = computer_guess_mechanism(answer_pool)
+            guess_count += 1
+
+    else:
+        print('I guessed it! The value is %s. It took me %s guess(es)' % (computer_guess,guess_count))
+
+
+guessing_game()
+"""
 
 
 
