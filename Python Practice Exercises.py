@@ -653,7 +653,7 @@ def hangman_image(wrong_guess_count):
 
 def hangman():
     correct_word = pick_word()
-    #correct_word = 'EVAPORATE'
+
     correct_letters = list(correct_word)
 
     word_length = len(correct_word)
@@ -662,7 +662,7 @@ def hangman():
     for x in range(word_length):
         letter_list.append('_')
 
-    print('Welcome to Hangman!')
+    print('Welcome to Hangman! Type "exit" to leave game. Type "letters" to see guessed letters.')
     print(' '.join(letter_list))
 
     guessed_letter_list = []
@@ -671,13 +671,18 @@ def hangman():
 
     while letter_list != correct_letters and wrong_guess_count < 6:
         guess_letter = input('Please Guess a Letter: ')
-        guess_letter = guess_letter.upper()
+        guess_letter = guess_letter.lower()
 
-        if guess_letter == 'EXIT':
+        if guess_letter == 'exit':
             break
+
+        if guess_letter == 'letters':
+            print(guessed_letter_list)
+            continue
 
         if guess_letter in guessed_letter_list:
             print('You already guessed that letter, try again!')
+            print(guessed_letter_list)
             continue
 
         guessed_letter_list.append(guess_letter)
@@ -686,6 +691,7 @@ def hangman():
             wrong_guess_count += 1
             hangman_image(wrong_guess_count)
             print('Incorrect Guess! You have %s guess(es) left.' % (6-wrong_guess_count))
+            print(' '.join(letter_list))
             continue
 
         if guess_letter in correct_letters:
@@ -697,7 +703,7 @@ def hangman():
         print(' '.join(letter_list))
 
     if letter_list != correct_letters:
-        print('Sorry, you lost!')
+        print('Sorry, you lost!. The word was: %s.' % correct_word)
     else:
         print('You Won!')
 
