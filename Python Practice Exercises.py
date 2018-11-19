@@ -613,20 +613,27 @@ max_game()
 
 """
 #Exercise 30/31/32: Pick Word/Guess Letters/Hangman
-with open('Scrabble_Word_List.txt', 'r') as open_file:
-    word_list_text = open_file.read()
-    word_list = word_list_text.split()
+def word_generator():
+    with open('Scrabble_Word_List_Copy.txt', 'r') as open_file:
+        word_list_text = open_file.read()
+        word_list = word_list_text.split()
+
+    for x in word_list[:]:
+        if len(x) <= 4:
+            word_list.remove(x)
+
+    return word_list
 
 def pick_word():
     import random
-    return random.choice(word_list)
+    return random.choice(word_generator())
 
 def hangman_image(wrong_guess_count):
     hangman = [['______       '],
                ['|    |       '],
                ['|    O       '],
                ['|   \|/      '],
-               ['|   / \      '],
+               ['|  _/ \_     '],
                ['|            '],
                ['|            ']]
 
@@ -647,6 +654,10 @@ def hangman_image(wrong_guess_count):
         hangman[4] = ['|            ']
     elif wrong_guess_count == 5:
         hangman[4] = ['|   /        ']
+    elif wrong_guess_count == 6:
+        hangman[4] = ['|   / \     ']
+    elif wrong_guess_count == 7:
+        hangman[4] = ['|  _/ \      ']
 
     for x in hangman:
         print(''.join(x))
@@ -669,7 +680,7 @@ def hangman():
 
     wrong_guess_count = 0
 
-    while letter_list != correct_letters and wrong_guess_count < 6:
+    while letter_list != correct_letters and wrong_guess_count < 8:
         guess_letter = input('Please Guess a Letter: ')
         guess_letter = guess_letter.lower()
 
@@ -686,11 +697,12 @@ def hangman():
             continue
 
         guessed_letter_list.append(guess_letter)
+        guessed_letter_list = sorted(guessed_letter_list)
 
         if guess_letter not in correct_letters:
             wrong_guess_count += 1
             hangman_image(wrong_guess_count)
-            print('Incorrect Guess! You have %s guess(es) left.' % (6-wrong_guess_count))
+            print('Incorrect Guess! You have %s guess(es) left.' % (8-wrong_guess_count))
             print(' '.join(letter_list))
             continue
 
@@ -708,4 +720,3 @@ def hangman():
         print('You Won!')
 
 hangman()
-
