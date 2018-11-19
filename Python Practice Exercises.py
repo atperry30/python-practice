@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov  2 16:10:37 2018
+
+@author: peral6e
+"""
+
+
 ###Exercise 1: Character Input
 """
 from datetime import datetime
@@ -143,9 +151,9 @@ def guess_mechanism():
     guess = int(guess)
     return guess
 
-import random
-
 def guessing_game():
+
+    import random
 
     guess = guess_mechanism()
     answer = random.randint(1,10)
@@ -290,7 +298,11 @@ def password_generator(length):
         password.append(str(random.choice(source)))
     password = ''.join(password)
     return password
+
+print(password_generator(25))
 """
+
+
 
 ###Exercise 18: Cows And Bulls
 """
@@ -467,8 +479,6 @@ def game_board():
 
 game_board()
 """
-
-
 
 
 #Exercise 25: Guessing Game Two
@@ -700,18 +710,4 @@ def hangman():
         print('You Won!')
 
 hangman()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
