@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov  2 16:10:37 2018
-
-@author: peral6e
-"""
-
-
 ###Exercise 1: Character Input
 """
 from datetime import datetime
