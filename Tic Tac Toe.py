@@ -1,6 +1,7 @@
 game_play = True
 
 def game_winner(board,player_number):
+    global game_play
     for x in range(3):
         if board[x][0] == board[x][1] == board[x][2] and board[x][0] != ' - ': #Row
             print('Player %s is the Winner!' % player_number)
