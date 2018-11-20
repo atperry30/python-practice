@@ -1,5 +1,6 @@
+game_play = True
+
 def game_winner(board,player_number):
-    game_play = True
     for x in range(3):
         if board[x][0] == board[x][1] == board[x][2] and board[x][0] != ' - ': #Row
             print('Player %s is the Winner!' % player_number)
@@ -64,9 +65,10 @@ def player_choice(board,player):
 
 def tic_tac_toe():
     board = [[' - ',' - ',' - '],[' - ',' - ',' - '],[' - ',' - ',' - ']]
-    game_play = True
     while game_play == True:
         for player in range (1,3):
+            if game_play == False:
+                break
             player_choice(board,player)
     else:
         print('Game Over!')
