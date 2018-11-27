@@ -294,56 +294,6 @@ def password_generator(length):
 print(password_generator(25))
 """
 
-
-
-###Exercise 18: Cows And Bulls
-"""
-def guessing_mechanism(guess,number,guess_count):
-    cow = 0
-    bull = 0
-
-    guess = list(guess)
-    number = list(number)
-
-    if guess == number:
-        print('You Won! It took you %s guesses!' % (guess_count))
-
-    else:
-        for x in range(4):
-            if guess[x] == number[x]:
-                cow += 1
-                guess[x] = 'guess_removed'
-                number[x] = 'answer_removed'
-
-        for x in range(4):
-            if guess[x] in number:
-                bull += 1
-                number.remove(guess[x])
-
-        guess = ''.join(guess)
-        number = ''.join(number)
-        print('%s cow(s), %s bull(s)' % (cow,bull))
-
-def cows_and_bulls():
-    import random
-    number = []
-    for x in range(4):
-        number.append(str(random.randint(0,9)))
-    number = ''.join(number)
-    print('Welcome to the Cows and Bulls Game!')
-    #print(number)
-    guess_count = 1
-    guess = ''
-    if guess != number:
-        while guess != number:
-            guess = str(input('Please Guess a 4 Digit Number '))
-            guessing_mechanism(guess,number,guess_count)
-            guess_count +=1
-
-cows_and_bulls()
-"""
-
-
 ###Exercise 20: Element Search
 """
 a = [x for x in range(0,3000) if x % 3 != 0]
@@ -516,90 +466,6 @@ def guessing_game():
 guessing_game()
 """
 
-#Exercise 26/27/29: Tic Tac Toe Draw/Game
-
-"""
-def winner_message(player_number,x,y):
-    game_play = True
-    if x == 4 and y == 4:
-        print('No Winner!')
-    else:
-        print('Player %s is the Winner!' % player_number)
-        game_play == False
-"""
-"""
-def game_winner(board,player_number):
-    game_play = True
-    for x in range(3):
-        if board[x][0] == board[x][1] == board[x][2] and board[x][0] != ' - ': #Row
-            print('Player %s is the Winner!' % player_number)
-            game_play == False
-            break
-        elif board[0][x] == board[1][x] == board[2][x] and board[0][x] != ' - ': #Column
-            print('Player %s is the Winner!' % player_number)
-            game_play == False
-            break
-        elif board[0][0] == board[1][1] == board[2][2] and board[0][0] != ' - ': #Diagnal1
-            print('Player %s is the Winner!' % player_number)
-            game_play == False
-            break
-        elif board[2][0] == board[1][1] == board[0][2] and board[1][1] != ' - ': #Diagnal2
-            print('Player %s is the Winner!' % player_number)
-            game_play == False
-            break
-
-def horizontal():
-    print(' ---'*3)
-
-def vertical(row,current_board):
-    if row == 0:
-        print('|'+current_board[0][0]+'|'+current_board[0][1]+'|'+current_board[0][2]+'|')
-    if row == 1:
-        print('|'+current_board[1][0]+'|'+current_board[1][1]+'|'+current_board[1][2]+'|')
-    if row == 2:
-        print('|'+current_board[2][0]+'|'+current_board[2][1]+'|'+current_board[2][2]+'|')
-
-def game_board(board):
-    for x in range(3):
-        horizontal()
-        vertical(x,board)
-    horizontal()
-
-def player_choice(board,player):
-    if player % 2 != 0:
-        player_number = 1
-    else:
-        player_number = 2
-
-    player_space = input('Player %s: Please enter your coordinate as Row,Col from 1 to 3: ' % player_number)
-    player_list = player_space.split(',')
-    row = int(player_list[0]) -1
-    column = int(player_list[1]) -1
-
-    game_winner(board,player_number)
-
-    if board[row][column] == ' o ' or board[row][column] == ' x ':
-        print('Spot Taken')
-
-    else:
-        if player_number == 1:
-            board[row][column] = ' x '
-        else:
-            board[row][column] = ' o '
-    game_board(board)
-
-def tic_tac_toe():
-    board = [[' - ',' - ',' - '],[' - ',' - ',' - '],[' - ',' - ',' - ']]
-    game_play = True
-    while game_play == True:
-        for player in range (1,10):
-            player_choice(board,player)
-    else:
-        print('Game Over!')
-
-tic_tac_toe()
-"""
-
 #Exercise 28: Max of Three
 """
 def max_game():
@@ -610,113 +476,41 @@ def max_game():
     print(three_list_sorted[len(three_list_sorted)-1])
 
 max_game()
-
 """
-#Exercise 30/31/32: Pick Word/Guess Letters/Hangman
-def word_generator():
-    with open('Scrabble_Word_List_Copy.txt', 'r') as open_file:
-        word_list_text = open_file.read()
-        word_list = word_list_text.split()
 
-    for x in word_list[:]:
-        if len(x) <= 4:
-            word_list.remove(x)
 
-    return word_list
 
-def pick_word():
-    import random
-    return random.choice(word_generator())
 
-def hangman_image(wrong_guess_count):
-    hangman = [['______       '],
-               ['|    |       '],
-               ['|    O       '],
-               ['|   \|/      '],
-               ['|  _/ \_     '],
-               ['|            '],
-               ['|            ']]
 
-    if wrong_guess_count == 0:
-        hangman[2] = ['|            ']
-        hangman[3] = ['|            ']
-        hangman[4] = ['|            ']
-    if wrong_guess_count == 1:
-        hangman[3] = ['|            ']
-        hangman[4] = ['|            ']
-    elif wrong_guess_count == 2:
-        hangman[3] = ['|    |       ']
-        hangman[4] = ['|            ']
-    elif wrong_guess_count == 3:
-        hangman[3] = ['|   \|       ']
-        hangman[4] = ['|            ']
-    elif wrong_guess_count == 4:
-        hangman[4] = ['|            ']
-    elif wrong_guess_count == 5:
-        hangman[4] = ['|   /        ']
-    elif wrong_guess_count == 6:
-        hangman[4] = ['|   / \     ']
-    elif wrong_guess_count == 7:
-        hangman[4] = ['|  _/ \      ']
 
-    for x in hangman:
-        print(''.join(x))
 
-def hangman():
-    correct_word = pick_word()
 
-    correct_letters = list(correct_word)
 
-    word_length = len(correct_word)
 
-    letter_list = []
-    for x in range(word_length):
-        letter_list.append('_')
 
-    print('Welcome to Hangman! Type "exit" to leave game. Type "letters" to see guessed letters.')
-    print(' '.join(letter_list))
 
-    guessed_letter_list = []
 
-    wrong_guess_count = 0
 
-    while letter_list != correct_letters and wrong_guess_count < 8:
-        guess_letter = input('Please Guess a Letter: ')
-        guess_letter = guess_letter.lower()
 
-        if guess_letter == 'exit':
-            break
 
-        if guess_letter == 'letters':
-            print(guessed_letter_list)
-            continue
 
-        if guess_letter in guessed_letter_list:
-            print('You already guessed that letter, try again!')
-            print(guessed_letter_list)
-            continue
 
-        guessed_letter_list.append(guess_letter)
-        guessed_letter_list = sorted(guessed_letter_list)
 
-        if guess_letter not in correct_letters:
-            wrong_guess_count += 1
-            hangman_image(wrong_guess_count)
-            print('Incorrect Guess! You have %s guess(es) left.' % (8-wrong_guess_count))
-            print(' '.join(letter_list))
-            continue
 
-        if guess_letter in correct_letters:
-            for x in range(word_length):
-                if guess_letter == correct_letters[x]:
-                    letter_list[x] = guess_letter
-            hangman_image(wrong_guess_count)
 
-        print(' '.join(letter_list))
 
-    if letter_list != correct_letters:
-        print('Sorry, you lost!. The word was: %s.' % correct_word)
-    else:
-        print('You Won!')
 
-hangman()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
