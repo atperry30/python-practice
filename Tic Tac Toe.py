@@ -2,6 +2,8 @@ game_play = True
 
 def game_winner(board,player_number):
     global game_play
+    unplayable_spaces = []
+
     for x in range(3):
         if board[x][0] == board[x][1] == board[x][2] and board[x][0] != ' - ': #Row
             print('Player %s is the Winner!' % player_number)
@@ -23,6 +25,13 @@ def game_winner(board,player_number):
             game_play = False
             return game_play
             break
+        elif board[x][0] != ' - ' and board[x][1] != ' - ' and board[x][2] != ' - ':
+            unplayable_spaces.append(x)
+
+    if unplayable_spaces == [0,1,2]:
+            print('Game Over, No One Wins!')
+            game_play = False
+            return game_play
 
 def horizontal():
     print(' ---'*3)
@@ -71,7 +80,5 @@ def tic_tac_toe():
             if game_play == False:
                 break
             player_choice(board,player)
-    else:
-        print('Game Over!')
 
 tic_tac_toe()
